@@ -1,4 +1,5 @@
-This script will record keystrokes on a target machine and email the results to a specified gmail account with a specified time interval.  For example, you can configure it to record key strokes on a computer and email the results to you every 15 minutes.
+This script will record keystrokes on a target machine and email the results to a specified gmail account with a specified time interval.  
+For example, you can configure it to record key strokes on a computer and email the results to you every 15 minutes.
 
 Open up run_keylogger.py to create an instance of the key_logger class.  Enter in A, B, C (see below) then run run_keylogger.py in terminal to begin logging keystrokes on that machine.  
 
