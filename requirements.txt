@@ -1,0 +1,1 @@
+pip install pynput==1.6.8
